@@ -5,7 +5,7 @@ function cleanup() {
         trap - SIGINT SIGTERM ERR EXIT
         if [ -n "${tmpdir+x}" ]; then
                 rm -rf "$tmpdir"
-                log "🗑️ Deleted temporary working directory $tmpdir"
+                log "🚮 Deleted temporary working directory $tmpdir"
         fi
 }
 
@@ -159,7 +159,7 @@ if [ ! -f "${source_iso}" ]; then
         curl -NsSL "${download_url}/${download_iso}" -o "${source_iso}"
         log "👍 Downloaded and saved to ${source_iso}"
 else
-        log "🗃️️ Using existing ${source_iso} file."
+        log "💾 Using existing ${source_iso} file."
         if [ ${gpg_verify} -eq 1 ]; then
                 if [ "${source_iso}" != "${script_dir}/${original_iso}" ]; then
                         log "⚠️ Automatic GPG verification is enabled. If the source ISO file is not the latest daily or release image, verification will fail!"
@@ -173,7 +173,7 @@ if [ ${gpg_verify} -eq 1 ]; then
                 curl -NsSL "${download_url}/SHA256SUMS" -o "${script_dir}/SHA256SUMS-${sha_suffix}"
                 curl -NsSL "${download_url}/SHA256SUMS.gpg" -o "${script_dir}/SHA256SUMS-${sha_suffix}.gpg"
         else
-                log "🗃️️ Using existing SHA256SUMS-${sha_suffix} & SHA256SUMS-${sha_suffix}.gpg files."
+                log "💾 Using existing SHA256SUMS-${sha_suffix} & SHA256SUMS-${sha_suffix}.gpg files."
         fi
 
         if [ ! -f "${script_dir}/${ubuntu_gpg_key_id}.keyring" ]; then
@@ -181,7 +181,7 @@ if [ ${gpg_verify} -eq 1 ]; then
                 gpg -q --no-default-keyring --keyring "${script_dir}/${ubuntu_gpg_key_id}.keyring" --keyserver "hkp://keyserver.ubuntu.com" --recv-keys "${ubuntu_gpg_key_id}"
                 log "👍 Downloaded and saved to ${script_dir}/${ubuntu_gpg_key_id}.keyring"
         else
-                log "🗃️️ Using existing Ubuntu signing key saved in ${script_dir}/${ubuntu_gpg_key_id}.keyring"
+                log "💾 Using existing Ubuntu signing key saved in ${script_dir}/${ubuntu_gpg_key_id}.keyring"
         fi
 
         log "🔐 Verifying ${source_iso} integrity and authenticity..."
