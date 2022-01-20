@@ -54,6 +54,8 @@ Available options:
                         That file will be used by default if it already exists.
 -d, --destination       Destination ISO file. By default <script directory>/ubuntu-autoinstall-<current date>.iso will be
                         created, overwriting any existing file.
+-t, --no-timestamp      Omit timestamps in logging output.
+-i, --no-icons          Omit icons in logging output.
 ```
 
 ### Example

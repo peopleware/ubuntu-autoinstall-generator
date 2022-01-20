@@ -15,7 +15,16 @@ script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 today=$(date +"%Y-%m-%d")
 
 function log() {
-        echo >&2 -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${1-}"
+  local msg=$1
+  if [ "${include_icons}" -eq 0 ]; then
+    msg="${msg:2}"
+  fi
+
+  if [ "${include_timestamp}" -eq 1 ]; then
+    echo >&2 -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${msg-}"
+  else
+    echo $msg
+  fi
 }
 
 function die() {
@@ -55,6 +64,8 @@ Available options:
                         That file will be used by default if it already exists.
 -d, --destination       Destination ISO file. By default ${script_dir}/ubuntu-autoinstall-$today.iso will be
                         created, overwriting any existing file.
+-t, --no-timestamp      Omit timestamps in logging output.
+-i, --no-icons          Omit icons in logging output.
 EOF
         exit
 }
@@ -74,6 +85,8 @@ function parse_params() {
         use_hwe_kernel=0
         md5_checksum=1
         use_release_iso=1
+        include_timestamp=1
+        include_icons=1
 
         while :; do
                 case "${1-}" in
@@ -84,6 +97,8 @@ function parse_params() {
                 -c | --no-md5) md5_checksum=0 ;;
                 -k | --no-verify) gpg_verify=0 ;;
                 -r | --use-release-iso) use_release_iso=1 ;;
+                -t | --no-timestamp) include_timestamp=0 ;;
+                -i | --no-icons) include_icons=0 ;;
                 -u | --user-data)
                         user_data_file="${2-}"
                         shift
