@@ -1,10 +1,10 @@
 # Ubuntu Autoinstall Generator 
 
-## Updated for 21.10
+## Updated for 22.04 LTS
 A script to generate a fully-automated ISO image for installing Ubuntu onto a machine without human interaction. This uses the new autoinstall method
 for Ubuntu 20.04 and newer.
 
-This script was updated and adapted from the original found [here](https://github.com/covertsh/ubuntu-autoinstall-generator) for 21.10. Impish has no daily builds, so the script will always use the release version instead. Because of this, the `-r` option has been removed.
+This script was updated and adapted from the original found [here](https://github.com/covertsh/ubuntu-autoinstall-generator) for 22.04 LTS. Jammy Jellyfish has no daily builds, so the script will always use the release version instead. Because of this, the `-r` option has been removed.
 
 ## [Looking for the desktop version?](https://github.com/covertsh/ubuntu-preseed-iso-generator)
 
@@ -21,7 +21,7 @@ This script can use an existing ISO image or download the latest daily image fro
 By default, the source ISO image is checked for integrity and authenticity using GPG. This can be disabled with ```-k```.
 
 ### Requirements
-Tested on Ubuntu 21.04 and Debian Buster.
+Tested on Ubuntu 22.04 and Debian Buster.
 - Utilities required:
     - ```xorriso```
     - ```sed```
@@ -32,7 +32,7 @@ Tested on Ubuntu 21.04 and Debian Buster.
 ```
 Usage: ubuntu-autoinstall-generator.sh [-h] [-v] [-a] [-e] [-u user-data-file] [-m meta-data-file] [-k] [-c] [-s source-iso-file] [-d destination-iso-file]
 
-💁 This script will create fully-automated Ubuntu 21.10 Impish Indri installation media.
+💁 This script will create fully-automated Ubuntu 22.04 LTS Jammy Jellyfish installation media.
 
 Available options:
 
@@ -50,7 +50,7 @@ Available options:
                         of the source ISO file. If they are not present the latest daily SHA256SUMS will be
                         downloaded and saved in the script directory. The Ubuntu signing key will be downloaded and
                         saved in a new keyring in the script directory.
--s, --source            Source ISO file. By default the latest ISO for Ubuntu 21.10 will be downloaded
+-s, --source            Source ISO file. By default the latest ISO for Ubuntu 22.04 LTS will be downloaded
                         and saved as <script directory>/ubuntu-original-<current date>.iso
                         That file will be used by default if it already exists.
 -d, --destination       Destination ISO file. By default <script directory>/ubuntu-autoinstall-<current date>.iso will be

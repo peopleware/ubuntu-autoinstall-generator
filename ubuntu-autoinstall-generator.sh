@@ -38,7 +38,7 @@ usage() {
         cat <<EOF
 Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-a] [-e] [-u user-data-file] [-m meta-data-file] [-k] [-c] [-r] [-s source-iso-file] [-d destination-iso-file]
 
-💁 This script will create fully-automated Ubuntu 21.10 Impish Indri installation media.
+💁 This script will create fully-automated Ubuntu 22.04 LTS Jammy Jellyfish installation media.
 
 Available options:
 
@@ -135,9 +135,9 @@ function parse_params() {
         fi
 
         if [ "${use_release_iso}" -eq 1 ]; then
-                download_url="https://releases.ubuntu.com/impish"
+                download_url="https://releases.ubuntu.com/jammy"
                 log "🔎 Checking for current release..."
-                download_iso=$(curl -sSL "${download_url}" | grep -oP 'ubuntu-21\.10-live-server-amd64\.iso' | head -n 1)
+                download_iso=$(curl -sSL "${download_url}" | grep -oP 'ubuntu-22\.04-live-server-amd64\.iso' | head -n 1)
                 original_iso="${download_iso}"
                 source_iso="${script_dir}/${download_iso}"
                 current_release=$(echo "${download_iso}" | cut -f2 -d-)
@@ -170,7 +170,7 @@ log "🔎 Checking for required utilities..."
 log "👍 All required utilities are installed."
 
 if [ ! -f "${source_iso}" ]; then
-        log "🌎 Downloading ISO image for Ubuntu 21.10 Impish Indri..."
+        log "🌎 Downloading ISO image for Ubuntu 22.04 LTS Jammy Jellyfish..."
         curl -NsSL "${download_url}/${download_iso}" -o "${source_iso}"
         log "👍 Downloaded and saved to ${source_iso}"
 else
@@ -220,8 +220,8 @@ else
         log "🤞 Skipping verification of source ISO."
 fi
 
-mbr=ubuntu-21.10-amd64.mbr
-efi=ubuntu-21.10-amd64.efi
+mbr=ubuntu-22.04-amd64.mbr
+efi=ubuntu-22.04-amd64.efi
 
 if [ ! -f "${mbr}" ] || [ ! -f "${efi}" ]; then
   log "🗄️ Extracting MBR template and EFI partition..."
